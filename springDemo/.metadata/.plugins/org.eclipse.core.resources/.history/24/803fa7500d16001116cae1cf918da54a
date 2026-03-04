@@ -1,0 +1,16 @@
+package com.springDemo.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.springDemo.entity.CartItem;
+import com.springDemo.entity.User;
+import 
+
+public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
+	
+	List<CartItem> findByUser(User user);
+	
+	void deletedByUserAndBookId(User user, Long bookId);
+}

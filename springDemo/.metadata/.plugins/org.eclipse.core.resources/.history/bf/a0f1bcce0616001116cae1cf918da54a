@@ -1,0 +1,8 @@
+package com.springDemo.entity;
+
+
+@Entity
+@DATA
+public class CartItem {
+	
+}

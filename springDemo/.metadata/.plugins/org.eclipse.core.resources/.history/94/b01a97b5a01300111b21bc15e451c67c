@@ -1,0 +1,7 @@
+package com.springDemo.service;
+
+
+@Controller
+public class LoginController {
+
+}

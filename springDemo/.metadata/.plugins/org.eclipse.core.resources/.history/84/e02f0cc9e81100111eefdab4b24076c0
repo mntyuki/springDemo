@@ -1,0 +1,7 @@
+package com.springDemo.repository;
+
+import com.springDemo.entity.Book;
+
+public interface BookRepositry extends JpaRepository<Book, Integer> {
+
+}

@@ -1,0 +1,14 @@
+/**
+ * 書籍追加用カート
+ */
+
+function addToCart(bookId) {
+    fetch('/cart/add/' + bookId, {
+        method: 'POST'
+    })
+    .then(response => response.text())
+    .then(total => {
+        document.getElementById("cartTotal").innerText =
+            "合計: " + total + "円";
+    });
+}

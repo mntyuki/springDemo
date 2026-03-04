@@ -1,0 +1,14 @@
+package com.springDemo.controller;
+
+import org.springframework.stereotype.Controller;
+
+import com.springDemo.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+public class UserController {
+	private UserService userService;
+	
+}

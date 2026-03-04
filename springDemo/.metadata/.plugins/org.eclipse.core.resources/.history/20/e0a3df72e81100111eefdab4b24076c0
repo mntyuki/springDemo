@@ -1,0 +1,6 @@
+package com.springDemo.repository;
+
+
+public interface BookRepositry extends JpaReposiitory<Book, Integer> {
+
+}

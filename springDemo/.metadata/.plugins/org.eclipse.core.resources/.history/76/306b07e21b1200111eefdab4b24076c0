@@ -1,0 +1,27 @@
+package com.springDemo.dto;
+
+import lombok.Data;
+
+@Data
+
+public class BookDto {
+	
+	/*本のタイトル*/
+	
+	private String title;
+	
+	
+	/*本の価格*/
+	
+	private Integer price;
+	
+	
+	/*本の発売日*/
+	
+	private Date publishDate;
+	
+	
+	/*本の著者名*/
+	
+	private String author;
+}

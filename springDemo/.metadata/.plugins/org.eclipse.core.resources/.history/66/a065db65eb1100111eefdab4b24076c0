@@ -1,0 +1,10 @@
+package com.springDemo.service;
+
+import org.springframework.stereotype.Service;
+
+
+@Transactional
+@Service
+public class BookService {
+	
+}

@@ -1,0 +1,8 @@
+package com.springDemo.dto;
+
+
+
+@Dto
+public class BookDto {
+
+}

@@ -1,0 +1,9 @@
+package com.springDemo.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+@RequiredArgsConstructor
+public class CartController {
+
+}

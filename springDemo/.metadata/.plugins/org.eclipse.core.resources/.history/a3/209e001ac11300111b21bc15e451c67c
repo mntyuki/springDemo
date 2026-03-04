@@ -1,0 +1,25 @@
+package com.springDemo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.springDemo.dto.LoginDto;
+import com.springDemo.security.UserDetailsServiceImpl;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Controller
+public class LoginController {
+	
+	private final UserDetailsServiceImpl detailsServiceImpl;
+	
+	//ログイン画面を表示
+	@GetMapping("/login")
+	public String login(Model model) {
+		
+		LoginDto loginDto = new LooginDto();
+		
+		return "/login";
+	}
+}

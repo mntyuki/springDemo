@@ -1,0 +1,7 @@
+package com.springDemo.controller;
+
+
+@Controller
+public class UserController {
+
+}

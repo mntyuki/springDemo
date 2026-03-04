@@ -1,0 +1,5 @@
+package com.springDemo.repository;
+
+public class BookRepositry {
+
+}

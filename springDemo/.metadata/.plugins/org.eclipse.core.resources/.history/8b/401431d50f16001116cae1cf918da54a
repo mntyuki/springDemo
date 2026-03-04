@@ -1,0 +1,35 @@
+package com.springDemo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.springDemo.entity.Book;
+import com.springDemo.entity.User;
+import com.springDemo.repository.BookRepository;
+import com.springDemo.repository.CartItemRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Service
+public class CartService {
+	
+	private final CartItemRepository cartItemRepository;
+	private final BookRepository bookRepository;
+	
+	/*書籍をカートへ追加
+	 * 
+	 * @param user ログイン中のユーザー
+	 * @oaram bookId 書籍ID
+	 * 
+	 * */
+	
+	public void addCart(User user, Long bookId) {
+		
+		Book book = bookRepository.findById(bookId).orElseThrow(); //bookidから書籍を検索
+		
+		/*カートに値を設定*/
+		CartItem cart = new CartItem();
+		
+		
+	}
+}

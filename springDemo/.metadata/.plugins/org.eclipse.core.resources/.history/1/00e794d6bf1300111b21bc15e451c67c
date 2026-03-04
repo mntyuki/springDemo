@@ -1,0 +1,15 @@
+package com.springDemo.dto;
+
+import jakarta.validation.constraints.NotBlank;
+
+@Data
+public class LoginDto {
+
+	/*ユーザー名*/
+	@NotBlank(message = "ユーザー名は必須です")
+	private String username;
+	
+	/*パスワード*/
+	@NotBlank(message = "パスワードは必須です")
+	private String password;
+}

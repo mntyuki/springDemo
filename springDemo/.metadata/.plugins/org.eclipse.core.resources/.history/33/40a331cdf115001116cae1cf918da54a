@@ -1,0 +1,55 @@
+package com.springDemo.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+/*
+ * springsecurityの設定用クラス
+ * 
+ * アクセス制御、ログイン処理、ログアウト処理
+ * 
+ * */
+
+@Configuration
+public class SecurityConfig {
+
+	/*
+	 * セキュリティフィルターチェーンの定義
+	 * 
+	 **/
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+		http
+				.authorizeHttpRequests(auth -> auth /*どのURLに誰がアクセスできるかを設定*/
+						.requestMatchers("/index", "/").permitAll()
+						.requestMatchers("/login").permitAll()
+						.requestMatchers("/userregister", "/register").permitAll()
+						.requestMatchers("/images/**", "/css/**", "/js/**").permitAll()
+						.requestMatchers("/bookcreate", "/bookedit").hasAnyRole("ADMIN")
+						.anyRequest().authenticated())
+				.formLogin(form -> form /*ログインフォームの設定*/
+						.loginPage("/login") /*ログインページのURL*/
+						.defaultSuccessUrl("/", true) /*ログイン後の遷移ページを指定*/
+						.permitAll()) /*ログインページには誰でもアクセス可能*/
+				.logout(logout -> logout
+						.logoutSuccessUrl("/login") /*ログアウト後の遷移ページを指定*/
+				);
+		
+		return http.build(); /*セキュリティ設定を有効にする*/
+	}
+
+	/*パスワードエンコーダー
+	 * 
+	 * BCrypt方式でパスワードをハッシュ化する
+	 * */
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+}

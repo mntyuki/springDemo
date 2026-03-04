@@ -1,0 +1,43 @@
+package com.springDemo.controller;
+
+import jakarta.validation.Valid;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.springDemo.dto.UserDto;
+import com.springDemo.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+public class UserController {
+	private final UserService userService;
+	
+	/*登録画面の表示*/
+	@GetMapping("/register")
+	public String showRegister(Model model) {
+		
+		model.addAttribute("userDto", new UserDto());
+		return "/register";
+	}
+	
+	
+	/*新規ユーザー登録*/
+	@PostMapping("/register")
+	public String register(@Valid @ModelAttribute UserDto userDto, BindingResult result, Model model) {
+		
+		if (result.hasErrors()) {
+			return "/login";
+		}
+		
+		userService.register(userDto);
+		
+		return "/login";
+	}
+}

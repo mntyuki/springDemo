@@ -1,0 +1,17 @@
+package com.springDemo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.springDemo.entity.User;
+@Repository
+public interface UserRepository extends JpaRepository <User, Long>{
+	
+	/*
+	 * ユーザー名でユーザー情報を取得
+	 * 
+	 * @param username 検索するユーザー名
+	 * @return ユーザー情報
+	 * */
+	Optional<User> findByUsername(String username);
+}

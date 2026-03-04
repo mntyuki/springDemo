@@ -1,0 +1,16 @@
+package com.springDemo.service;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.springDemo.repository.CartItemRepository;
+import com.springDemo.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@@RequiredArgsConstructor
+@Service
+public class CartService {
+	
+	private final CartItemRepository cartItemRepository;
+}

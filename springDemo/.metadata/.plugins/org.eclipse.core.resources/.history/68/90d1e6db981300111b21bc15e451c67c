@@ -1,0 +1,15 @@
+package com.springDemo.security;
+
+import org.springframework.context.annotation.Configuration;
+
+/*
+ * springsecurityの設定用クラス
+ * 
+ * アクセス制御、ログイン処理、ログアウト処理
+ * 
+ * */
+
+@Configuration
+public class SecurityConfig {
+	
+}

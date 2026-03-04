@@ -1,0 +1,44 @@
+package com.springDemo.service;
+
+import java.util.List;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.springDemo.dto.BookDto;
+import com.springDemo.entity.Book;
+import com.springDemo.repository.BookRepository;
+
+
+@Transactional
+@Service
+public class BookService {
+	
+	/*BookRepositoryをインスタンス化*/
+	
+	@Autowired
+	BookRepository repository;
+	Book book;
+	
+	
+	/*
+	 * DBから本の一覧を取得
+	 * 
+	 * @return DB内の本一覧
+	 * */
+	
+	public List<Book> findAll() {
+		return repository.findAll();
+	}
+	
+	
+	/*
+	 * 入力された本をDBに保存する
+	 */
+	
+	public void save(BookDto bookDto) {
+		
+	}
+}

@@ -1,0 +1,24 @@
+package com.springDemo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.springDemo.dto.UserDto;
+import com.springDemo.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+public class UserController {
+	private final UserService userService;
+	
+	/*登録画面の表示*/
+	@GetMapping("/register")
+	public String register(Model model) {
+		
+		model.addAttribute("userDto", new UserDto());
+		return "/register";
+	}
+}

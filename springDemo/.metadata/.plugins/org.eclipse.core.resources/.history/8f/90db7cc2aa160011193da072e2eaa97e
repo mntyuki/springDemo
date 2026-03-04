@@ -1,0 +1,23 @@
+package com.springDemo.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.springDemo.repository.UserRepository;
+import com.springDemo.service.CartService;
+
+import lombok.RequiredArgsConstructor;
+
+
+/*カート制御コントローラ*/
+@RestController
+@RequiredArgsConstructor
+@RequestMappping("/cart")
+public class CartController {
+	
+	private final CartService cartService;
+	private final UserRepository userRepository;
+	
+	
+	
+	
+}

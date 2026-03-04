@@ -1,0 +1,37 @@
+package com.springDemo.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+/*
+ * springsecurityの設定用クラス
+ * 
+ * アクセス制御、ログイン処理、ログアウト処理
+ * 
+ * */
+
+@Configuration
+public class SecurityConfig {
+
+	/*
+	 * セキュリティフィルターチェーンの定義
+	 * 
+	 **/
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+		http
+				.authorizeHttpRequests(auth -> auth /*どのURLに誰がアクセスできるかを設定*/
+						.requestMatchers("/", "/login").permitAll()
+						.anyRequest().authenticated())
+				.formLogin(form -> form /*ログインフォームの設定*/
+						.loginPage("/login")
+						.defaultSuccessUrl("/", true)
+						.permitAll())
+				.logout(logout -> logout
+						.logoutSuccessUrl("/"));
+	}
+}

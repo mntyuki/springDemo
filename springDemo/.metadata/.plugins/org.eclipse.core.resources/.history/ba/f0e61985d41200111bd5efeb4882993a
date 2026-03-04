@@ -1,0 +1,119 @@
+package com.springDemo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.springDemo.dto.BookDto;
+import com.springDemo.dto.EditBookDto;
+import com.springDemo.entity.Book;
+import com.springDemo.service.BookService;
+
+@Controller
+public class BookController {
+
+	/*コンストラクタ*/
+
+	@Autowired
+	BookService service;
+
+	/*トップページに遷移*/
+
+	@GetMapping("/index") //indexにリクエストが来た際に呼び出されるメソッド
+	public String index() {
+		return "index";
+	}
+
+	/*書籍一覧を表示*/
+
+	@GetMapping("/booklist")
+
+	public String bookList(Model model) {
+
+		/*serviceからbook一覧を取得*/
+		List<Book> bookList = service.findAll();
+
+		/*modelに本の一覧を設定してviewに渡す*/
+		model.addAttribute("bookList", bookList);
+
+		/*一覧画面へ遷移する*/
+		return "booklist";
+	}
+
+	/*書籍の登録画面を表示
+	 * 
+	 * @param model
+	 * 
+	 * @return 新規登録画面
+	 * */
+
+	@GetMapping("/bookcreate")
+	public String createBook(Model model) {
+
+		/*入力用のdtoを画面に渡す*/
+		model.addAttribute("bookDto", new BookDto());
+
+		return "bookcreate";
+	}
+
+	/*書籍の新規登録
+	 * 
+	 * @param model
+	 * 
+	 * @param bookDto
+	 * 
+	 * @return
+	 * */
+
+	/*bookcreate.htmlにポスト送信されることでメソッドが動き出す*/
+	@PostMapping("/bookcreate")
+	public String saveBook(@ModelAttribute @Validated BookDto bookDto, BindingResult result, Model model) {
+
+		/*バリデーションエラー時は書籍登録画面へ遷移*/
+		if (result.hasErrors()) {
+			return "bookcreate";
+		}
+
+		/*本を登録する*/
+		service.insert(bookDto);
+
+		/*書籍一覧へリダイレクト*/
+		return "redirect:/booklist";
+	}
+	
+
+	/*
+	 * 書籍編集画面の表示
+	 * */
+	@GetMapping("/bookedit")
+	public String editBook(Model model, EditBookDto editbook) {
+
+		/*編集画面を表示*/
+
+		model.addAttribute(service.getOneBook(editbook.getId()));
+
+		/*編集画面へ遷移*/
+		return "bookedit";
+	}
+	
+	
+	/*
+	 * 変更内容の保存
+	 * 
+	 */
+	@PostMapping("/bookedit")
+	public String update(@ModelAttribute @Validated EditBookDto bookDto, BindingResult result, Model model) {
+		
+		service.update(bookDto);
+		
+		return "redirect:/booklist";
+	}
+
+}

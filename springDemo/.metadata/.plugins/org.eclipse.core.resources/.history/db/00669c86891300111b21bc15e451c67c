@@ -1,0 +1,21 @@
+package com.springDemo.security;
+
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
+
+import com.springDemo.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+/*認証時にユーザー情報を取得するクラス
+ * 
+ * usernameをキーにしてDB検索を行う
+ * */
+
+@Service
+@RequiredArgsConstructor
+public class UserDetailsServiceImpl implements UserDetailsService {
+	@AutoWired
+	UserRepository userRepository;
+
+}

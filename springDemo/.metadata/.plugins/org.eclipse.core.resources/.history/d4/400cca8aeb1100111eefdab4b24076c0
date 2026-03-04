@@ -1,0 +1,22 @@
+package com.springDemo.service;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+@Transactional
+@Service
+public class BookService {
+	
+	/*BookRepositoryをインスタンス化*/
+	@Autowired
+	BookRepository repository;
+	
+	
+	/*DBから本の一覧を取得*/
+	public List<Book> findAll() {
+		return repository.findAll();
+	}
+}

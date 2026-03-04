@@ -1,0 +1,9 @@
+package com.springDemo.entity;
+
+import jakarta.persistence.Entity;
+
+@Entity
+@DATA
+public class CartItem {
+	
+}

@@ -1,0 +1,12 @@
+package com.springDemo.entity;
+
+import jakarta.persistence.Entity;
+
+import lombok.Data;
+
+@Entity
+@Data
+@Table(name = "cart_items")
+public class CartItem {
+	
+}

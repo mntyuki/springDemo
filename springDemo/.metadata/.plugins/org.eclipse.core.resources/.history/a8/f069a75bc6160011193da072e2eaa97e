@@ -1,0 +1,21 @@
+/**
+ * 書籍追加用カート
+ */
+
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+function addToCart(bookId) {
+    fetch('/cart/add/' + bookId, {
+        method: 'POST'
+    })
+    .then(response => response.text())
+    .then(total => {
+        document.getElementById("cartTotal").innerText =
+            "合計: " + total + "円";
+    });
+}
+
+window.onload = function() {
+    fetch("/cart/total")
+}

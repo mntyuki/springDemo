@@ -1,0 +1,8 @@
+package com.springDemo.dto;
+
+import lombok;
+
+@Date
+public class EditBookDto {
+	
+}

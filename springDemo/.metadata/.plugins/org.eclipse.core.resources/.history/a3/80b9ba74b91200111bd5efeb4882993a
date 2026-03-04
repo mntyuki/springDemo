@@ -1,0 +1,37 @@
+package com.springDemo.dto;
+
+import java.time.LocalDate;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Data;
+
+@Data
+public class EditBookDto {
+	/*本のタイトル*/
+	@NotBlank(message = "タイトルを入力してください")
+	
+	private String title;
+
+	/*本の価格*/
+	@NotNull(message = "値段を入力してください。")
+	@Positive(message = "不正な値です")
+	
+	private Integer price;
+
+	/*本の発売日*/
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message ="発売日を入力してください")
+	
+	private LocalDate publishDate;
+
+	/*本の著者名*/
+	@NotBlank(message = "著者名を入力してください")
+	
+	private String author;
+}
+

@@ -1,0 +1,70 @@
+package com.springDemo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.springDemo.entity.Book;
+import com.springDemo.entity.CartItem;
+import com.springDemo.entity.User;
+import com.springDemo.repository.BookRepository;
+import com.springDemo.repository.CartItemRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Service
+public class CartService {
+	
+	@Autowired
+	private final CartItemRepository cartItemRepository;
+	private final BookRepository bookRepository;
+
+	/*書籍をカートへ追加
+	 * 
+	 * @param user ログイン中のユーザー
+	 * @oaram bookId 書籍ID
+	 * 
+	 * */
+
+	public void addCart(User user, Long bookId) {
+
+		Book book = bookRepository.findById(bookId).orElseThrow(); //bookidから書籍を検索
+
+		/*カートに値を設定*/
+		CartItem item = new CartItem();
+		item.setUser(user);
+		item.setBook(book);
+		item.setQuantity(1);
+
+		cartItemRepository.save(item);
+	}
+
+	/*カート一覧を表示*/
+
+	public List<CartItem> getCartItems(User user) {
+		return cartItemRepository.findByUser(user);
+	}
+
+	/*カート内金額の算出*/
+
+	public int totalCalc(User user) {
+
+		/*
+		 * stream 引数のuserのcartitemを一つずつ渡す
+		 * 
+		 * */
+		return getCartItems(user).stream()
+
+				//stream()で渡されたcartitemがitem->
+				.mapToInt(item -> item.getBook().getPrice() * item.getQuantity())
+				.sum();
+	}
+	
+	/*カートから削除*/
+	
+	public void deleteCartItem(User user, Long bookId) {
+		cartItemRepository.deletedByUserAndBookId(user, bookId);
+	}
+}

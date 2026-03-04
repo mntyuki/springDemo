@@ -1,0 +1,26 @@
+package com.springDemo.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.web.SecurityFilterChain;
+
+/*
+ * springsecurityの設定用クラス
+ * 
+ * アクセス制御、ログイン処理、ログアウト処理
+ * 
+ * */
+
+@Configuration
+public class SecurityConfig {
+	
+	/*
+	 * セキュリティフィルターチェーンの定義
+	 * 
+	 **/
+	
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) Throws Exception {
+		
+	} 
+}

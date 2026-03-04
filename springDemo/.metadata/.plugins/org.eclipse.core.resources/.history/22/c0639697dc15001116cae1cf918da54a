@@ -1,0 +1,46 @@
+package com.springDemo.security;
+
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.springDemo.entity.User;
+
+/*
+ * springsecurity用のユーザー詳細クラス
+ * userentityをspringsecurityが扱える形式へ変換する
+ * */
+
+public class UserDetailsImpl implements UserDetails {
+	
+	/*コンストラクタ*/
+	
+	private final User user;
+	private final List<GrantedAuthority> authorities;
+	
+	public UserDetailsImpl(User user, List<GrantedAuthority> authorities) {
+		this.user = user;
+		this.authorities = authorities;
+	}
+	
+	
+	/*権限情報の返却*/
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+	
+	/*ハッシュ化されたパスワードを返却*/
+	@Override
+	public String getPassword() {
+		return user.getPassword();
+	}
+	
+	/*ログインID(username)を取得*/
+	@Override
+	public String getUsername() {
+		return user.getUsername();
+	}
+}

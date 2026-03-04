@@ -1,0 +1,13 @@
+package com.springDemo.security;
+
+import org.springframework.security.core.userdetails.UserDetails;
+
+/*
+ * springsecurity用のユーザー詳細クラス
+ * userentityをspringsecurityが扱える形式へ変換する
+ * */
+public class UserDetailsImpl implements UserDetails {
+	
+	private final User user;
+	
+}

@@ -1,0 +1,6 @@
+package com.springDemo.controller;
+
+@Controller
+public class CartController {
+
+}

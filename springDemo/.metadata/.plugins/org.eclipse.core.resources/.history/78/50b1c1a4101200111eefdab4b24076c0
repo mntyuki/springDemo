@@ -1,0 +1,5 @@
+spring.application.name=demo
+spring.datasource=POSTGRESQL
+spring.datasource.url=jdbc:postgresql://localhost:5433/demodb
+spring.datasource.username=postgres
+spring.datasource.password=0414

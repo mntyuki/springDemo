@@ -1,0 +1,9 @@
+package com.springDemo.dto;
+
+import lombok.Data;
+
+@Data
+
+public class BookDto {
+	
+}

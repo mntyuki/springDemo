@@ -1,0 +1,8 @@
+package com.springDemo.entity;
+
+
+@Entity
+@Date
+public class User {
+	
+}

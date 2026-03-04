@@ -1,0 +1,91 @@
+package com.springDemo.controller;
+
+import java.security.Principal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.springDemo.entity.User;
+import com.springDemo.repository.UserRepository;
+import com.springDemo.service.CartService;
+
+import lombok.RequiredArgsConstructor;
+
+/*カート制御コントローラ*/
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/cart")
+public class CartController {
+
+	@Autowired
+	private final CartService cartService;
+	private final UserRepository userRepository;
+
+	/*
+	 * 書籍をカートに追加
+	 * 
+	 */
+
+	@PostMapping("/add/{bookId}")
+	public int addToCart(@PathVariable Long bookId, Principal principal) {
+		User user = userRepository
+				.findByUsername(principal.getName())
+				.orElseThrow(() -> new RuntimeException("ユーザーが存在しません"));
+		
+		cartService.addCart(user, bookId);
+		
+		return cartService.totalCalc(user);
+	}
+	
+	/*
+	 * カートの合計金額取得
+	 * */
+	
+	@GetMapping("/total")
+	public int getTotal(Principal principal) {
+		User user = userRepository
+				.findByUsername(principal.getName())
+				.orElseThrow(()-> new RuntimeException("ユーザーが存在しません"));
+		
+		return cartService.totalCalc(user);
+	}
+	
+	
+	/*
+	 * カート内の書籍を削除
+	 * */
+	
+	@PostMapping("/cart/delete/{bookId}")
+	public String deleteCartItem(@PathVariable Long bookId, Principal principal) {
+		
+		User user = userRepository.findByUsername(principal.getName())
+				.orElseThrow();
+		
+		cartService.deleteCartItem(user, bookId);
+		
+		return "redirect:cart";
+	}
+	
+	
+	@GetMapping
+	public String viewCart(Model model, Principal principal) {
+
+	    User user = userRepository
+	            .findByUsername(principal.getName())
+	            .orElseThrow(()-> new RuntimeException("ユーザーが存在しません"));
+
+	    model.addAttribute("cartItems",
+	            cartService.getCartItems(user));
+
+	    model.addAttribute("total",
+	            cartService.totalCalc(user));
+
+	    return "cart";
+	}
+	
+}
