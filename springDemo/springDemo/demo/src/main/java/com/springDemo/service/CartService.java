@@ -38,12 +38,11 @@ public class CartService {
 
 			if (item.isDeleted()) { //論理削除済みのとき
 				item.setDeleted(false);
-				item.setQuantity(1);
-				cartItemRepository.save(item);
-			} else { //カートに同じ商品があるとき
-				item.setQuantity(item.getQuantity() + 1);
-				cartItemRepository.save(item);
-			}
+
+			} //カートに同じ商品があるとき
+			item.setQuantity(item.getQuantity() + 1);
+			cartItemRepository.save(item);
+
 		} else { //カートに同じ商品がないとき
 			CartItem newItem = new CartItem();
 			newItem.setUser(user);

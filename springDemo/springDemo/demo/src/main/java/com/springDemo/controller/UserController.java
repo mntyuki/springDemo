@@ -27,7 +27,11 @@ public class UserController {
 	}
 	
 	
-	/*新規ユーザー登録*/
+	/*
+	 * 新規ユーザー登録
+	 * 
+	 * @result エラーを保持
+	 * */
 	@PostMapping("/register")
 	public String register(@Validated @ModelAttribute UserDto userDto, BindingResult result, Model model) {
 

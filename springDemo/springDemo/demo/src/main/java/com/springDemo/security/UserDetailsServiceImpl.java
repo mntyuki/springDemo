@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 /*認証時にユーザー情報を取得するクラス
  * 
- * usernameをキーにしてDB検索を行う
+ * usernameをキーにしてDB検索してUserエンティティをUserDitailsに変換
  * */
 
 @Service
