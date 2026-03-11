@@ -32,14 +32,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	 * */
 
 	@Override
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException {
-		
+	public UserDetails loadUserByUsername(String username) {
+
 		//DBからユーザーを検索
 		User user = userRepository.findByUsername(username)
-		.orElseThrow(()-> new UsernameNotFoundException("ユーザーが存在しません"));
-		
-	
+				.orElseThrow(() -> new UsernameNotFoundException("ユーザーが存在しません"));
+
 		return new UserDetailsImpl(user);
 	}
 

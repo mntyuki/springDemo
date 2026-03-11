@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.springDemo.dto.BookDto;
+import com.springDemo.dto.BookSerchDto;
 import com.springDemo.dto.EditBookDto;
 import com.springDemo.entity.Book;
 import com.springDemo.repository.BookRepository;
@@ -29,17 +31,35 @@ class BookServiceTest {
 
 	@Test
 	void DBから本一覧を表示する() {
-		
+		BookSerchDto dto = new BookSerchDto();
 		List<Book> books = List.of(new Book(), new Book());
 
 		when(repository.findByDeletedFalse())
 				.thenReturn(books);
 
-		List<Book> result = bookService.findAll();
+		List<Book> result = bookService.serchBooks(dto);
 		
 		assertEquals(2, result.size());
 		
 		 verify(repository).findByDeletedFalse();
+	}
+	
+	
+	@Test
+	void 検索フォームに入力された書籍を表示する() {
+		BookSerchDto dto = new BookSerchDto();
+		Book book = new Book();
+		List<Book> books = new ArrayList<Book>();
+		book.setTitle("test");
+		books.add(book);
+		dto.setKeyword("test");
+		
+		when(repository.findByTitleContaining(dto.getKeyword()))
+				.thenReturn(books);
+		
+		List<Book> result = bookService.serchBooks(dto);
+		
+		assertEquals("test", result.get(0).getTitle());
 	}
 
 	@Test

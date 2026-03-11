@@ -9,20 +9,25 @@
 </head>
 
 <body>
-    <div th:replace="~{share::header}"></div>
-    <h2>ログイン</h2>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label>ユーザー名</label>
-            <input type="text" name="username">
-        </div>
-        <div>
-            <label>パスワード</label>
-            <input type="password" name="password">
-        </div>
-        <button type="submit">ログイン</button>
-    </form>
-    <div th:if="${param.error}">
-        ログインに失敗しました
-    </div>
+	<div th:replace="~{share::header}"></div>
+
+	<div class="container">
+		<div class="mx-auto" style="width: 350px;">
+			<h2>ログイン</h2>
+			<form th:action="@{/login}" method="post">
+				<div>
+					<label>ユーザー名</label>
+					<input class="form-control rounded-pill" type="text" name="username">
+				</div>
+				<div>
+					<label>パスワード</label>
+					<input class="form-control rounded-pill" type="password" name="password">
+				</div>
+				<button class="rounded-pill btn btn-primary text-nowrap" type="submit">ログイン</button>
+			</form>
+			<div th:if="${param.error}">
+				ログインに失敗しました
+			</div>
+		</div>
+	</div>
 </body>

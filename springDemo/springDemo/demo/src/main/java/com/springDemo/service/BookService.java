@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springDemo.dto.BookDto;
+import com.springDemo.dto.BookSerchDto;
 import com.springDemo.dto.EditBookDto;
 import com.springDemo.entity.Book;
 import com.springDemo.repository.BookRepository;
@@ -21,17 +22,27 @@ public class BookService {
 	/*BookRepositoryをインスタンス化*/
 	
 	@Autowired
-	BookRepository repository;
+	private final BookRepository repository;
 	
 	
 	/*
 	 * DBから本の一覧を取得
+	 * 書籍検索処理
 	 * 
 	 * @return DB内の本一覧
 	 * */
 	
-	public List<Book> findAll() {
-		return repository.findByDeletedFalse();
+	public List<Book> serchBooks(BookSerchDto dto) {
+		
+		String keyword = dto.getKeyword();
+		
+		//未入力なら全件取得
+		if(keyword == null || keyword.isBlank()) {
+			return repository.findByDeletedFalse();
+		}
+		
+		//部分検索
+		return repository.findByTitleContaining(keyword);
 	}
 	
 	

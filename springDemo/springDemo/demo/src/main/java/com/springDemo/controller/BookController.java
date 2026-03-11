@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.springDemo.dto.BookDto;
+import com.springDemo.dto.BookSerchDto;
 import com.springDemo.dto.EditBookDto;
 import com.springDemo.entity.Book;
 import com.springDemo.service.BookService;
@@ -35,14 +36,13 @@ public class BookController {
 	/*書籍一覧を表示*/
 
 	@GetMapping("/booklist")
+	public String bookList(BookSerchDto dto, Model model) {
 
-	public String bookList(Model model) {
+		/*book一覧または、検索結果を取得*/
+		List<Book> bookList = service.serchBooks(dto);
 
-		/*serviceからbook一覧を取得*/
-		List<Book> bookList = service.findAll();
-
-		/*modelに本の一覧を設定してviewに渡す*/
-		model.addAttribute("bookList", bookList);
+		/*modelに本の一覧または、検索結果を設定してviewに渡す*/
+		model.addAttribute("bookList",bookList);
 
 		/*一覧画面へ遷移する*/
 		return "booklist";

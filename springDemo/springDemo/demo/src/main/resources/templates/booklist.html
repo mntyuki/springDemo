@@ -13,6 +13,12 @@
 
 <body>
 	<div th:replace="~{share::header}"></div>
+	<div class="d-flex justify-content-center">
+		<form th:action="@{/booklist}" class="d-flex" method="get">
+			<input type="text" name="keyword" class="form-control rounded-pill me-2" placeholder="タイトル検索">
+			<button type="submit" class="rounded-pill btn btn-primary text-nowrap">検索</button>
+		</form>
+	</div>
 	<div class="container">
 		<div class="row">
 			<div th:each="book : ${bookList}" th:object="${book}" class="card col-2 me-2 mt-1" style="width: 16rem;">

@@ -13,5 +13,7 @@ import com.springDemo.entity.Book;
  *  */
 
 public interface BookRepository extends JpaRepository<Book, Long> {
+	
 	List<Book> findByDeletedFalse();
+	List<Book> findByTitleContaining(String keyword);
 }
